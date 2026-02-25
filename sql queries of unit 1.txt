@@ -1,0 +1,127 @@
+SQL> desc deposit;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ACTNO                                              VARCHAR2(5)
+ CNAME                                              VARCHAR2(15)
+ BNAME                                              VARCHAR2(15)
+ AMOUNT                                             NUMBER(9,2)
+ ADATE                                              DATE
+
+SQL> desc branch;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BNAME                                              VARCHAR2(15)
+ CITY                                               VARCHAR2(15)
+
+SQL> desc borrow;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ LOANNO                                             VARCHAR2(5)
+ CNAME                                              VARCHAR2(15)
+ BNAME                                              VARCHAR2(15)
+ AMMOUNT                                            NUMBER(9,2)
+
+SQL> desc customers5;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CNAME                                              VARCHAR2(15)
+ CITY                                               VARCHAR2(15)
+
+SQL> select *from deposit;
+
+ACTNO CNAME           BNAME               AMOUNT ADATE                          
+----- --------------- --------------- ---------- ---------                      
+100   ABHISHEK        ASIF                  1000 01-MAR-95                      
+100   ABHISHEK        ASIF                  1000 01-MAR-95                      
+100   ABHISHEK        ASIF                  1000 01-MAR-95                      
+100   anil            vrce                  1000 01-MAR-95                      
+101   sunil           agni                  5000 04-JAN-96                      
+102   mehul           karolbagh             3500 17-NOV-96                      
+103   Madhuri         chandi                1200 17-DEC-95                      
+104   pramod          m g road              3000 27-MAR-96                      
+105   sandip          andheri               2000 31-MAR-96                      
+106   shivani         virar                 1000 05-SEP-95                      
+107   kranti          nehru place           5000 02-JUL-95                      
+
+11 rows selected.
+
+SQL> select *from borrow;
+
+LOANN CNAME           BNAME              AMMOUNT                                
+----- --------------- --------------- ----------                                
+201   ANIL            VRCE                  1000                                
+202   MEHUL           AJNI                  5000                                
+203   SUNIL           DHRAMPETH             3000                                
+204   MADHURI         ANDHERI               2000                                
+205   PRMOD           VIRAR                 8000                                
+206   KRANTI          NEHRU PLACE           3000                                
+
+6 rows selected.
+
+SQL> select *from customers5;
+
+CNAME           CITY                                                            
+--------------- ---------------                                                 
+anil            calcuta                                                         
+sunil           delhi                                                           
+mehul           baroda                                                          
+mandar          patna                                                           
+madhuri         nagpur                                                          
+pramod          nagpur                                                          
+sandip          surat                                                           
+shivani         bombay                                                          
+kranti          bombay                                                          
+naren           bombay                                                          
+
+10 rows selected.
+
+SQL> select *from branch;
+
+BNAME           CITY                                                            
+--------------- ---------------                                                 
+VRCE            NAGPUR                                                          
+AGNI            NAGPUR                                                          
+KAROLBAGH       DELHI                                                           
+CHANDI          DELHI                                                           
+DHRAMPETH       NAGPUR                                                          
+
+SQL> select actno,amount from deposit;
+
+ACTNO     AMOUNT                                                                
+----- ----------                                                                
+100         1000                                                                
+100         1000                                                                
+100         1000                                                                
+100         1000                                                                
+101         5000                                                                
+102         3500                                                                
+103         1200                                                                
+104         3000                                                                
+105         2000                                                                
+106         1000                                                                
+107         5000                                                                
+
+11 rows selected.
+
+SQL> select cname from deposit
+  2  
+SQL> select cname from deposit where amount>4000.00;
+
+CNAME                                                                           
+---------------                                                                 
+sunil                                                                           
+kranti                                                                          
+
+SQL> select cname from deposit where adate>to_date('01-dec-96','dd-mon-yy');
+
+no rows selected
+
+SQL> select cname from customers5 where city='bombay';
+
+CNAME                                                                           
+---------------                                                                 
+shivani                                                                         
+kranti                                                                          
+naren                                                                           
+
+SQL> spool off;
