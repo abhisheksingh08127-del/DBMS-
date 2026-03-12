@@ -1,0 +1,120 @@
+SQL> desc cust_master;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ CUST_NO                                                                                                                    VARCHAR2(5)
+ CUST_NAME                                                                                                                  VARCHAR2(15)
+ ADDRESS1                                                                                                                   VARCHAR2(15)
+ ADDRESS2                                                                                                                   VARCHAR2(15)
+ CITY                                                                                                                       VARCHAR2(15)
+ STATE                                                                                                                      VARCHAR2(15)
+ PH_NO                                                                                                                      NUMBER(10)
+
+SQL> select *from cust_master;
+
+CUST_ CUST_NAME       ADDRESS1        ADDRESS2        CITY            STATE                PH_NO                                                                                                        
+----- --------------- --------------- --------------- --------------- --------------- ----------                                                                                                        
+c1    priya           ring road       pujapark        ahmedabad       gujrat          8989878548                                                                                                        
+c2    puja            lagpat nagar    shyamlal colony banaras         up              7898456213                                                                                                        
+c3    ankit           borivali        panchayat nagar mumbai          maharastra      7885984251                                                                                                        
+c4    ravi            vajid road      nandbhumi       delhi           delhi           7898452034                                                                                                        
+c5    alpa            jamnagar        railway colony  ahmedabad       gujrat          7465244589                                                                                                        
+
+SQL> select *from cust_master where state='gujrat';
+
+CUST_ CUST_NAME       ADDRESS1        ADDRESS2        CITY            STATE                PH_NO                                                                                                        
+----- --------------- --------------- --------------- --------------- --------------- ----------                                                                                                        
+c1    priya           ring road       pujapark        ahmedabad       gujrat          8989878548                                                                                                        
+c5    alpa            jamnagar        railway colony  ahmedabad       gujrat          7465244589                                                                                                        
+
+SQL> select *from cust_master order by cust_name;
+
+CUST_ CUST_NAME       ADDRESS1        ADDRESS2        CITY            STATE                PH_NO                                                                                                        
+----- --------------- --------------- --------------- --------------- --------------- ----------                                                                                                        
+c5    alpa            jamnagar        railway colony  ahmedabad       gujrat          7465244589                                                                                                        
+c3    ankit           borivali        panchayat nagar mumbai          maharastra      7885984251                                                                                                        
+c1    priya           ring road       pujapark        ahmedabad       gujrat          8989878548                                                                                                        
+c2    puja            lagpat nagar    shyamlal colony banaras         up              7898456213                                                                                                        
+c4    ravi            vajid road      nandbhumi       delhi           delhi           7898452034                                                                                                        
+
+
+
+
+
+SQL> select distinct city from cust_master;
+
+CITY                                                                                                                                                                                                    
+---------------                                                                                                                                                                                         
+mumbai                                                                                                                                                                                                  
+delhi                                                                                                                                                                                                   
+banaras                                                                                                                                                                                                 
+ahmedabad                                                                                                                                                                                               
+
+
+
+SQL> update cust_master set address1='cg road' where address1='ring road';
+
+1 row updated.
+
+SQL> select *from cust_master;
+
+CUST_ CUST_NAME       ADDRESS1        ADDRESS2        CITY            STATE                PH_NO                                                                                                        
+----- --------------- --------------- --------------- --------------- --------------- ----------                                                                                                        
+c1    priya           cg road         pujapark        ahmedabad       gujrat          8989878548                                                                                                        
+c2    puja            lagpat nagar    shyamlal colony banaras         up              7898456213                                                                                                        
+c3    ankit           borivali        panchayat nagar mumbai          maharastra      7885984251                                                                                                        
+c4    ravi            vajid road      nandbhumi       delhi           delhi           7898452034                                                                                                        
+c5    alpa            jamnagar        railway colony  ahmedabad       gujrat          7465244589                                                                                                        
+
+SQL> select city from cust_master where state='gujrat';
+
+CITY                                                                                                                                                                                                    
+---------------                                                                                                                                                                                         
+ahmedabad                                                                                                                                                                                               
+ahmedabad                                                                                                                                                                                               
+
+SQL> alter table cust_master add pin_code number;
+
+Table altered.
+
+SQL> select *from cust_master;
+
+CUST_ CUST_NAME       ADDRESS1        ADDRESS2        CITY            STATE                PH_NO   PIN_CODE                                                                                             
+----- --------------- --------------- --------------- --------------- --------------- ---------- ----------                                                                                             
+c1    priya           cg road         pujapark        ahmedabad       gujrat          8989878548                                                                                                        
+c2    puja            lagpat nagar    shyamlal colony banaras         up              7898456213                                                                                                        
+c3    ankit           borivali        panchayat nagar mumbai          maharastra      7885984251                                                                                                        
+c4    ravi            vajid road      nandbhumi       delhi           delhi           7898452034                                                                                                        
+c5    alpa            jamnagar        railway colony  ahmedabad       gujrat          7465244589                                                                                                        
+
+SQL> alter table cust_master drop  (pin_code);
+
+Table altered.
+
+SQL> select *from cust_master;
+
+CUST_ CUST_NAME       ADDRESS1        ADDRESS2        CITY            STATE                PH_NO                                                                                                        
+----- --------------- --------------- --------------- --------------- --------------- ----------                                                                                                        
+c1    priya           cg road         pujapark        ahmedabad       gujrat          8989878548                                                                                                        
+c2    puja            lagpat nagar    shyamlal colony banaras         up              7898456213                                                                                                        
+c3    ankit           borivali        panchayat nagar mumbai          maharastra      7885984251                                                                                                        
+c4    ravi            vajid road      nandbhumi       delhi           delhi           7898452034                                                                                                        
+c5    alpa            jamnagar        railway colony  ahmedabad       gujrat          7465244589                                                                                                        
+
+SQL> delete from cust_master where ph_no=7898452034;
+
+1 row deleted.
+
+SQL> select *from cust_master;
+
+CUST_ CUST_NAME       ADDRESS1        ADDRESS2        CITY            STATE                PH_NO                                                                                                        
+----- --------------- --------------- --------------- --------------- --------------- ----------                                                                                                        
+c1    priya           cg road         pujapark        ahmedabad       gujrat          8989878548                                                                                                        
+c2    puja            lagpat nagar    shyamlal colony banaras         up              7898456213                                                                                                        
+c3    ankit           borivali        panchayat nagar mumbai          maharastra      7885984251                                                                                                        
+c5    alpa            jamnagar        railway colony  ahmedabad       gujrat          7465244589                                                                                                        
+
+SQL> rename cust_master to customer_detail;
+
+Table renamed.
+
+SQL> spool off;
