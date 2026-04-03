@@ -1,0 +1,204 @@
+SQL> select *from bank_branch;
+
+BRANC BRANCH_NAM BRANCH_ADDRESS  BRANCH_CITY     BRANCH_STATE    BRANCH_OP      
+----- ---------- --------------- --------------- --------------- ---------      
+B001  BOI        Jagnathroad     rajkot          Gujrat          22-MAR-15      
+B002  SBI        Boriwaliroad    mumbai          Maharastra      12-JAN-00      
+B003  HDFC       Agra road       agra            U.P             04-FEB-98      
+B004  Dena bank  Cg road         ahemdabad       Gujrat          20-SEP-12      
+B005  ICICI      Majvadiroad     Junagadh        Gujrat          07-MAY-11      
+
+SQL> Alter table bank_branch modify branch_name='union' where branch_id='b003';
+Alter table bank_branch modify branch_name='union' where branch_id='b003'
+                                          *
+ERROR at line 1:
+ORA-00902: invalid datatype 
+
+
+SQL> Alter table bank_branch modify branch_name='union' where branch_id='B003';
+Alter table bank_branch modify branch_name='union' where branch_id='B003'
+                                          *
+ERROR at line 1:
+ORA-00902: invalid datatype 
+
+
+SQL> alter table bank_branch modify branch_state varchar2(20);
+
+Table altered.
+
+SQL> select *from bank_branch;
+
+BRANC BRANCH_NAM BRANCH_ADDRESS  BRANCH_CITY     BRANCH_STATE         BRANCH_OP 
+----- ---------- --------------- --------------- -------------------- --------- 
+B001  BOI        Jagnathroad     rajkot          Gujrat               22-MAR-15 
+B002  SBI        Boriwaliroad    mumbai          Maharastra           12-JAN-00 
+B003  HDFC       Agra road       agra            U.P                  04-FEB-98 
+B004  Dena bank  Cg road         ahemdabad       Gujrat               20-SEP-12 
+B005  ICICI      Majvadiroad     Junagadh        Gujrat               07-MAY-11 
+
+SQL> update bank_branch set branch_name='union' where branch_id='b003';
+
+0 rows updated.
+
+SQL> select *from bank_branch;
+
+BRANC BRANCH_NAM BRANCH_ADDRESS  BRANCH_CITY     BRANCH_STATE         BRANCH_OP 
+----- ---------- --------------- --------------- -------------------- --------- 
+B001  BOI        Jagnathroad     rajkot          Gujrat               22-MAR-15 
+B002  SBI        Boriwaliroad    mumbai          Maharastra           12-JAN-00 
+B003  HDFC       Agra road       agra            U.P                  04-FEB-98 
+B004  Dena bank  Cg road         ahemdabad       Gujrat               20-SEP-12 
+B005  ICICI      Majvadiroad     Junagadh        Gujrat               07-MAY-11 
+
+SQL> update bank_branch set branch_name='union' where branch_id='B003';
+
+1 row updated.
+
+SQL> select *from bank_branch;
+
+BRANC BRANCH_NAM BRANCH_ADDRESS  BRANCH_CITY     BRANCH_STATE         BRANCH_OP 
+----- ---------- --------------- --------------- -------------------- --------- 
+B001  BOI        Jagnathroad     rajkot          Gujrat               22-MAR-15 
+B002  SBI        Boriwaliroad    mumbai          Maharastra           12-JAN-00 
+B003  union      Agra road       agra            U.P                  04-FEB-98 
+B004  Dena bank  Cg road         ahemdabad       Gujrat               20-SEP-12 
+B005  ICICI      Majvadiroad     Junagadh        Gujrat               07-MAY-11 
+
+SQL> update bank_branch set branch_state='delhi' where branch_name='BOI';
+
+1 row updated.
+
+SQL> select *from bank_branch;
+
+BRANC BRANCH_NAM BRANCH_ADDRESS  BRANCH_CITY     BRANCH_STATE         BRANCH_OP 
+----- ---------- --------------- --------------- -------------------- --------- 
+B001  BOI        Jagnathroad     rajkot          delhi                22-MAR-15 
+B002  SBI        Boriwaliroad    mumbai          Maharastra           12-JAN-00 
+B003  union      Agra road       agra            U.P                  04-FEB-98 
+B004  Dena bank  Cg road         ahemdabad       Gujrat               20-SEP-12 
+B005  ICICI      Majvadiroad     Junagadh        Gujrat               07-MAY-11 
+
+SQL> update bank_branch set branch_open_date='04-nov-2015' where branch_name='union';
+
+1 row updated.
+
+SQL> select *from bank_branch;
+
+BRANC BRANCH_NAM BRANCH_ADDRESS  BRANCH_CITY     BRANCH_STATE         BRANCH_OP 
+----- ---------- --------------- --------------- -------------------- --------- 
+B001  BOI        Jagnathroad     rajkot          delhi                22-MAR-15 
+B002  SBI        Boriwaliroad    mumbai          Maharastra           12-JAN-00 
+B003  union      Agra road       agra            U.P                  04-NOV-15 
+B004  Dena bank  Cg road         ahemdabad       Gujrat               20-SEP-12 
+B005  ICICI      Majvadiroad     Junagadh        Gujrat               07-MAY-11 
+
+SQL> alter table bank_branch add pincode number(8);
+
+Table altered.
+
+SQL> select *from bank_branch;
+
+BRANC BRANCH_NAM BRANCH_ADDRESS  BRANCH_CITY     BRANCH_STATE         BRANCH_OP 
+----- ---------- --------------- --------------- -------------------- --------- 
+   PINCODE                                                                      
+----------                                                                      
+B001  BOI        Jagnathroad     rajkot          delhi                22-MAR-15 
+                                                                                
+                                                                                
+B002  SBI        Boriwaliroad    mumbai          Maharastra           12-JAN-00 
+                                                                                
+                                                                                
+B003  union      Agra road       agra            U.P                  04-NOV-15 
+                                                                                
+                                                                                
+
+BRANC BRANCH_NAM BRANCH_ADDRESS  BRANCH_CITY     BRANCH_STATE         BRANCH_OP 
+----- ---------- --------------- --------------- -------------------- --------- 
+   PINCODE                                                                      
+----------                                                                      
+B004  Dena bank  Cg road         ahemdabad       Gujrat               20-SEP-12 
+                                                                                
+                                                                                
+B005  ICICI      Majvadiroad     Junagadh        Gujrat               07-MAY-11 
+                                                                                
+                                                                                
+
+SQL> set linesize200
+SQL> set pazesize200
+SP2-0735: unknown SET option beginning "pazesize20..."
+SQL> set pazesize 200
+SP2-0158: unknown SET option "pazesize"
+SQL> set linesize 200
+SQL> set pazesize 200
+SP2-0158: unknown SET option "pazesize"
+SQL> select *from bank_branch;
+
+BRANC BRANCH_NAM BRANCH_ADDRESS  BRANCH_CITY     BRANCH_STATE         BRANCH_OP    PINCODE                                                                                                              
+----- ---------- --------------- --------------- -------------------- --------- ----------                                                                                                              
+B001  BOI        Jagnathroad     rajkot          delhi                22-MAR-15                                                                                                                         
+B002  SBI        Boriwaliroad    mumbai          Maharastra           12-JAN-00                                                                                                                         
+B003  union      Agra road       agra            U.P                  04-NOV-15                                                                                                                         
+B004  Dena bank  Cg road         ahemdabad       Gujrat               20-SEP-12                                                                                                                         
+B005  ICICI      Majvadiroad     Junagadh        Gujrat               07-MAY-11                                                                                                                         
+
+SQL> update bank_branch set pincode=360006 where branch_name='denabank';
+
+0 rows updated.
+
+SQL> update bank_branch set pincode=360006 where branch_name='Dena bank';
+
+1 row updated.
+
+SQL> select *from bank_branch;
+
+BRANC BRANCH_NAM BRANCH_ADDRESS  BRANCH_CITY     BRANCH_STATE         BRANCH_OP    PINCODE                                                                                                              
+----- ---------- --------------- --------------- -------------------- --------- ----------                                                                                                              
+B001  BOI        Jagnathroad     rajkot          delhi                22-MAR-15                                                                                                                         
+B002  SBI        Boriwaliroad    mumbai          Maharastra           12-JAN-00                                                                                                                         
+B003  union      Agra road       agra            U.P                  04-NOV-15                                                                                                                         
+B004  Dena bank  Cg road         ahemdabad       Gujrat               20-SEP-12     360006                                                                                                              
+B005  ICICI      Majvadiroad     Junagadh        Gujrat               07-MAY-11                                                                                                                         
+
+SQL> DELETE FROM Branch WHERE branch_open_date = '07-may-2011';
+DELETE FROM Branch WHERE branch_open_date = '07-may-2011'
+                         *
+ERROR at line 1:
+ORA-00904: "BRANCH_OPEN_DATE": invalid identifier 
+
+
+SQL> DELETE FROM bank_ Branch WHERE branch_open_date = '07-may-2011';
+DELETE FROM bank_ Branch WHERE branch_open_date = '07-may-2011'
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> DELETE FROM bank_branch WHERE branch_open_date = '07-may-2011';
+
+1 row deleted.
+
+SQL> select *from bank_branch;
+
+BRANC BRANCH_NAM BRANCH_ADDRESS  BRANCH_CITY     BRANCH_STATE         BRANCH_OP    PINCODE                                                                                                              
+----- ---------- --------------- --------------- -------------------- --------- ----------                                                                                                              
+B001  BOI        Jagnathroad     rajkot          delhi                22-MAR-15                                                                                                                         
+B002  SBI        Boriwaliroad    mumbai          Maharastra           12-JAN-00                                                                                                                         
+B003  union      Agra road       agra            U.P                  04-NOV-15                                                                                                                         
+B004  Dena bank  Cg road         ahemdabad       Gujrat               20-SEP-12     360006                                                                                                              
+
+SQL> rename bank_branch to branch_master;
+
+Table renamed.
+
+SQL> desc branch_master;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ BRANCH_ID                                                                                                                  VARCHAR2(5)
+ BRANCH_NAME                                                                                                                VARCHAR2(10)
+ BRANCH_ADDRESS                                                                                                             VARCHAR2(15)
+ BRANCH_CITY                                                                                                                VARCHAR2(15)
+ BRANCH_STATE                                                                                                               VARCHAR2(20)
+ BRANCH_OPEN_DATE                                                                                                           DATE
+ PINCODE                                                                                                                    NUMBER(8)
+
+SQL> spool off;
