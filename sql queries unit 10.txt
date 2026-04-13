@@ -1,0 +1,193 @@
+SQL> CREATE TABLE CUSTOMER (
+  2  CUST_NO NUMBER(4) PRIMARY KEY,
+  3  FIRST_NAME VARCHAR2(20) NOT NULL,
+  4  LAST_NAME VARCHAR2(20),
+  5  ADDRESS VARCHAR2(20),
+  6  CITY VARCHAR2(8),
+  7  STATE VARCHAR2(20),
+  8  PIN NUMBER(6),
+  9  B_DATE DATE,
+ 10  STATUS CHAR(1) CHECK (STATUS IN ('V','I','A'))
+ 11  );
+
+Table created.
+
+SQL> INSERT INTO CUSTOMER VALUES (1003,'RAJ','BAHADUR','SHANTI VILLA','UDP','KARNATAKA',576101,TO_DATE('01-AUG-1970','DD-MON-YYYY'),'V');
+
+1 row created.
+
+SQL> INSERT INTO CUSTOMER VALUES (1004,'FELIX','SIMON','M-J-56','PJM','GOA',403002,TO_DATE('12-FEB-1971','DD-MON-YYYY'),'A');
+
+1 row created.
+
+SQL> INSERT INTO CUSTOMER VALUES (1005,'RAJAN','KUTTY','A1 TRADERS','KNR','KERALA',670001,TO_DATE('09-JUN-1971','DD-MON-YYYY'),'A');
+
+1 row created.
+
+SQL> INSERT INTO CUSTOMER VALUES (1006,'SHILPA','PATIL','12/4B','MNG','KARNATAKA',574154,TO_DATE('11-DEC-1970','DD-MON-YYYY'),'I');
+
+1 row created.
+
+SQL> INSERT INTO CUSTOMER VALUES (1007,'BOSCO','RAKSHIT','R.K. PLAZA','BNG','KARNATAKA',576201,TO_DATE('01-JAN-1971','DD-MON-YYYY'),'A');
+
+1 row created.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SELECT * FROM CUSTOMER;
+
+   CUST_NO FIRST_NAME           LAST_NAME            ADDRESS              CITY     STATE                       PIN B_DATE    S                                                                          
+---------- -------------------- -------------------- -------------------- -------- -------------------- ---------- --------- -                                                                          
+      1003 RAJ                  BAHADUR              SHANTI VILLA         UDP      KARNATAKA                576101 01-AUG-70 V                                                                          
+      1004 FELIX                SIMON                M-J-56               PJM      GOA                      403002 12-FEB-71 A                                                                          
+      1005 RAJAN                KUTTY                A1 TRADERS           KNR      KERALA                   670001 09-JUN-71 A                                                                          
+      1006 SHILPA               PATIL                12/4B                MNG      KARNATAKA                574154 11-DEC-70 I                                                                          
+      1007 BOSCO                RAKSHIT              R.K. PLAZA           BNG      KARNATAKA                576201 01-JAN-71 A                                                                          
+
+SQL> SELECT * FROM CUSTOMER WHERE STATE = 'KARNATAKA';
+
+   CUST_NO FIRST_NAME           LAST_NAME            ADDRESS              CITY     STATE                       PIN B_DATE    S                                                                          
+---------- -------------------- -------------------- -------------------- -------- -------------------- ---------- --------- -                                                                          
+      1003 RAJ                  BAHADUR              SHANTI VILLA         UDP      KARNATAKA                576101 01-AUG-70 V                                                                          
+      1006 SHILPA               PATIL                12/4B                MNG      KARNATAKA                574154 11-DEC-70 I                                                                          
+      1007 BOSCO                RAKSHIT              R.K. PLAZA           BNG      KARNATAKA                576201 01-JAN-71 A                                                                          
+
+SQL> DELETE FROM CUSTOMER WHERE PIN = 576201;
+
+1 row deleted.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> UPDATE CUSTOMER SET PIN = 476001 WHERE CUST_NO = 1004;
+
+1 row updated.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> UPDATE CUSTOMER
+  2  SET ADDRESS = 'KAVI MUDDANNA MARG', PIN = 576104
+  3  WHERE CUST_NO = 1003;
+
+1 row updated.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> DELETE FROM CUSTOMER WHERE STATE = 'GOA';
+
+1 row deleted.
+
+SQL> ROLLBACK;  -- Retrieves all deleted records back
+  2  
+SQL> SELECT * FROM CUSTOMER WHERE STATUS = 'I';
+
+   CUST_NO FIRST_NAME           LAST_NAME            ADDRESS              CITY     STATE                       PIN B_DATE    S                                                                          
+---------- -------------------- -------------------- -------------------- -------- -------------------- ---------- --------- -                                                                          
+      1006 SHILPA               PATIL                12/4B                MNG      KARNATAKA                574154 11-DEC-70 I                                                                          
+
+SQL> SELECT DISTINCT STATE FROM CUSTOMER;
+
+STATE                                                                                                                                                                                                   
+--------------------                                                                                                                                                                                    
+KERALA                                                                                                                                                                                                  
+KARNATAKA                                                                                                                                                                                               
+
+SQL> SELECT * FROM CUSTOMER ORDER BY STATE ASC;
+
+   CUST_NO FIRST_NAME           LAST_NAME            ADDRESS              CITY     STATE                       PIN B_DATE    S                                                                          
+---------- -------------------- -------------------- -------------------- -------- -------------------- ---------- --------- -                                                                          
+      1003 RAJ                  BAHADUR              KAVI MUDDANNA MARG   UDP      KARNATAKA                576104 01-AUG-70 V                                                                          
+      1006 SHILPA               PATIL                12/4B                MNG      KARNATAKA                574154 11-DEC-70 I                                                                          
+      1005 RAJAN                KUTTY                A1 TRADERS           KNR      KERALA                   670001 09-JUN-71 A                                                                          
+
+SQL> SELECT STATE FROM CUSTOMER ORDER BY STATE DESC;
+
+STATE                                                                                                                                                                                                   
+--------------------                                                                                                                                                                                    
+KERALA                                                                                                                                                                                                  
+KARNATAKA                                                                                                                                                                                               
+KARNATAKA                                                                                                                                                                                               
+
+SQL> SELECT * FROM CUSTOMER WHERE STATE = 'KARNATAKA' AND STATUS = 'V';
+
+   CUST_NO FIRST_NAME           LAST_NAME            ADDRESS              CITY     STATE                       PIN B_DATE    S                                                                          
+---------- -------------------- -------------------- -------------------- -------- -------------------- ---------- --------- -                                                                          
+      1003 RAJ                  BAHADUR              KAVI MUDDANNA MARG   UDP      KARNATAKA                576104 01-AUG-70 V                                                                          
+
+SQL> SELECT * FROM CUSTOMER WHERE STATE IN ('KARNATAKA','KERALA');
+
+   CUST_NO FIRST_NAME           LAST_NAME            ADDRESS              CITY     STATE                       PIN B_DATE    S                                                                          
+---------- -------------------- -------------------- -------------------- -------- -------------------- ---------- --------- -                                                                          
+      1003 RAJ                  BAHADUR              KAVI MUDDANNA MARG   UDP      KARNATAKA                576104 01-AUG-70 V                                                                          
+      1005 RAJAN                KUTTY                A1 TRADERS           KNR      KERALA                   670001 09-JUN-71 A                                                                          
+      1006 SHILPA               PATIL                12/4B                MNG      KARNATAKA                574154 11-DEC-70 I                                                                          
+
+SQL> SELECT * FROM CUSTOMER
+  2  WHERE STATE IN ('KARNATAKA','KERALA') AND STATUS = 'A';
+
+   CUST_NO FIRST_NAME           LAST_NAME            ADDRESS              CITY     STATE                       PIN B_DATE    S                                                                          
+---------- -------------------- -------------------- -------------------- -------- -------------------- ---------- --------- -                                                                          
+      1005 RAJAN                KUTTY                A1 TRADERS           KNR      KERALA                   670001 09-JUN-71 A                                                                          
+
+SQL> SELECT * FROM CUSTOMER WHERE STATE = 'KARNATAKA' AND PIN = 576201;
+
+no rows selected
+
+SQL> SELECT * FROM CUSTOMER WHERE CUST_NO != 1005;
+
+   CUST_NO FIRST_NAME           LAST_NAME            ADDRESS              CITY     STATE                       PIN B_DATE    S                                                                          
+---------- -------------------- -------------------- -------------------- -------- -------------------- ---------- --------- -                                                                          
+      1003 RAJ                  BAHADUR              KAVI MUDDANNA MARG   UDP      KARNATAKA                576104 01-AUG-70 V                                                                          
+      1006 SHILPA               PATIL                12/4B                MNG      KARNATAKA                574154 11-DEC-70 I                                                                          
+
+SQL> SELECT * FROM CUSTOMER WHERE STATE LIKE 'K%';
+
+   CUST_NO FIRST_NAME           LAST_NAME            ADDRESS              CITY     STATE                       PIN B_DATE    S                                                                          
+---------- -------------------- -------------------- -------------------- -------- -------------------- ---------- --------- -                                                                          
+      1003 RAJ                  BAHADUR              KAVI MUDDANNA MARG   UDP      KARNATAKA                576104 01-AUG-70 V                                                                          
+      1005 RAJAN                KUTTY                A1 TRADERS           KNR      KERALA                   670001 09-JUN-71 A                                                                          
+      1006 SHILPA               PATIL                12/4B                MNG      KARNATAKA                574154 11-DEC-70 I                                                                          
+
+SQL> SELECT * FROM CUSTOMER WHERE FIRST_NAME LIKE '%RAJ%';
+
+   CUST_NO FIRST_NAME           LAST_NAME            ADDRESS              CITY     STATE                       PIN B_DATE    S                                                                          
+---------- -------------------- -------------------- -------------------- -------- -------------------- ---------- --------- -                                                                          
+      1003 RAJ                  BAHADUR              KAVI MUDDANNA MARG   UDP      KARNATAKA                576104 01-AUG-70 V                                                                          
+      1005 RAJAN                KUTTY                A1 TRADERS           KNR      KERALA                   670001 09-JUN-71 A                                                                          
+
+SQL> SELECT * FROM CUSTOMER WHERE CUST_NO BETWEEN 1003 AND 1005;
+
+   CUST_NO FIRST_NAME           LAST_NAME            ADDRESS              CITY     STATE                       PIN B_DATE    S                                                                          
+---------- -------------------- -------------------- -------------------- -------- -------------------- ---------- --------- -                                                                          
+      1003 RAJ                  BAHADUR              KAVI MUDDANNA MARG   UDP      KARNATAKA                576104 01-AUG-70 V                                                                          
+      1005 RAJAN                KUTTY                A1 TRADERS           KNR      KERALA                   670001 09-JUN-71 A                                                                          
+
+SQL> SELECT * FROM CUSTOMER WHERE B_DATE BETWEEN '10-JAN-71' AND '31-DEC-71';
+
+   CUST_NO FIRST_NAME           LAST_NAME            ADDRESS              CITY     STATE                       PIN B_DATE    S                                                                          
+---------- -------------------- -------------------- -------------------- -------- -------------------- ---------- --------- -                                                                          
+      1005 RAJAN                KUTTY                A1 TRADERS           KNR      KERALA                   670001 09-JUN-71 A                                                                          
+
+SQL> SELECT * FROM CUSTOMER WHERE CITY IN ('UDP','MNG','BNG','PGN');
+
+   CUST_NO FIRST_NAME           LAST_NAME            ADDRESS              CITY     STATE                       PIN B_DATE    S                                                                          
+---------- -------------------- -------------------- -------------------- -------- -------------------- ---------- --------- -                                                                          
+      1003 RAJ                  BAHADUR              KAVI MUDDANNA MARG   UDP      KARNATAKA                576104 01-AUG-70 V                                                                          
+      1006 SHILPA               PATIL                12/4B                MNG      KARNATAKA                574154 11-DEC-70 I                                                                          
+
+SQL> RENAME CUSTOMER TO CUST;
+
+Table renamed.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SPOOL OFF;
