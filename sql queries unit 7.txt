@@ -1,0 +1,282 @@
+SQL> CREATE TABLE JOB1 (
+  2  job_id VARCHAR2(10),
+  3  job_name VARCHAR2(30),
+  4  min_sal NUMBER(10),
+  5  max_sal NUMBER(10)
+  6  );
+
+Table created.
+
+SQL> CREATE TABLE EMPLOYEE2 (
+  2  emp_no NUMBER(5),
+  3  emp_name VARCHAR2(20),
+  4  emp_sal NUMBER(10),
+  5  emp_comm NUMBER(10),
+  6  dept_no NUMBER(5)
+  7  );
+
+Table created.
+
+SQL> CREATE TABLE DEPOSIT2 (
+  2  A_no NUMBER(5),
+  3  cname VARCHAR2(20),
+  4  Bname VARCHAR2(20),
+  5  Amount NUMBER(10),
+  6  adate DATE
+  7  );
+
+Table created.
+
+SQL> DESC JOB1;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ JOB_ID                                             VARCHAR2(10)
+ JOB_NAME                                           VARCHAR2(30)
+ MIN_SAL                                            NUMBER(10)
+ MAX_SAL                                            NUMBER(10)
+
+SQL> DESC EMPLOYEE2;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_NO                                             NUMBER(5)
+ EMP_NAME                                           VARCHAR2(20)
+ EMP_SAL                                            NUMBER(10)
+ EMP_COMM                                           NUMBER(10)
+ DEPT_NO                                            NUMBER(5)
+
+SQL> DESC DEPOSIT2;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ A_NO                                               NUMBER(5)
+ CNAME                                              VARCHAR2(20)
+ BNAME                                              VARCHAR2(20)
+ AMOUNT                                             NUMBER(10)
+ ADATE                                              DATE
+
+SQL> INSERT INTO JOB1 VALUES ('J001','Manager',5000,10000);
+
+1 row created.
+
+SQL> INSERT INTO JOB1 VALUES ('J002','Clerk',2000,5000);
+
+1 row created.
+
+SQL> INSERT INTO JOB1 VALUES ('J003','Analyst',4000,8000);
+
+1 row created.
+
+SQL> INSERT INTO JOB1 VALUES ('J004','Salesman',3000,6000);
+
+1 row created.
+
+SQL> INSERT INTO JOB1 VALUES ('J005','Peon',1000,3000);
+
+1 row created.
+
+SQL> SELECT * FROM JOB1;
+
+JOB_ID     JOB_NAME                          MIN_SAL    MAX_SAL                 
+---------- ------------------------------ ---------- ----------                 
+J001       Manager                              5000      10000                 
+J002       Clerk                                2000       5000                 
+J003       Analyst                              4000       8000                 
+J004       Salesman                             3000       6000                 
+J005       Peon                                 1000       3000                 
+
+SQL> INSERT INTO EMPLOYEE2 VALUES (101,'Anil',6000,500,10);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE2 VALUES (102,'Amit',7000,600,20);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE2 VALUES (103,'Sunil',4500,300,10);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE2 VALUES (104,'Ravi',3000,200,30);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE2 VALUES (105,'Ajay',8000,700,20);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE2 VALUES (106,'Neha',2000,100,10);
+
+1 row created.
+
+SQL> SELECT * FROM EMPLOYEE2;
+
+    EMP_NO EMP_NAME                EMP_SAL   EMP_COMM    DEPT_NO                
+---------- -------------------- ---------- ---------- ----------                
+       101 Anil                       6000        500         10                
+       102 Amit                       7000        600         20                
+       103 Sunil                      4500        300         10                
+       104 Ravi                       3000        200         30                
+       105 Ajay                       8000        700         20                
+       106 Neha                       2000        100         10                
+
+6 rows selected.
+
+SQL> INSERT INTO DEPOSIT2 VALUES
+  2  (201,'Anil','Andheri',7000,TO_DATE('01-JAN-2006','DD-MON-YYYY'));
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO DEPOSIT2 VALUES
+  2  (202,'Amit','Borivali',5000,TO_DATE('15-FEB-2006','DD-MON-YYYY'));
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO DEPOSIT2 VALUES
+  2  (203,'Sunil','Dadar',3000,TO_DATE('10-MAR-2006','DD-MON-YYYY'));
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO DEPOSIT2 VALUES
+  2  (204,'Ravi','Andheri',9000,TO_DATE('20-JUL-2006','DD-MON-YYYY'));
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO DEPOSIT2 VALUES
+  2  (205,'Ajay','Bandra',10000,TO_DATE('25-JUL-2006','DD-MON-YYYY'));
+
+1 row created.
+
+SQL> SELECT * FROM DEPOSIT2;
+
+      A_NO CNAME                BNAME                    AMOUNT ADATE           
+---------- -------------------- -------------------- ---------- ---------       
+       201 Anil                 Andheri                    7000 01-JAN-06       
+       202 Amit                 Borivali                   5000 15-FEB-06       
+       203 Sunil                Dadar                      3000 10-MAR-06       
+       204 Ravi                 Andheri                    9000 20-JUL-06       
+       205 Ajay                 Bandra                    10000 25-JUL-06       
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SELECT * FROM JOB1;
+
+JOB_ID     JOB_NAME                          MIN_SAL    MAX_SAL                 
+---------- ------------------------------ ---------- ----------                 
+J001       Manager                              5000      10000                 
+J002       Clerk                                2000       5000                 
+J003       Analyst                              4000       8000                 
+J004       Salesman                             3000       6000                 
+J005       Peon                                 1000       3000                 
+
+SQL> SELECT * FROM EMPLOYEE2;
+
+    EMP_NO EMP_NAME                EMP_SAL   EMP_COMM    DEPT_NO                
+---------- -------------------- ---------- ---------- ----------                
+       101 Anil                       6000        500         10                
+       102 Amit                       7000        600         20                
+       103 Sunil                      4500        300         10                
+       104 Ravi                       3000        200         30                
+       105 Ajay                       8000        700         20                
+       106 Neha                       2000        100         10                
+
+6 rows selected.
+
+SQL> SELECT * FROM DEPOSIT2;
+
+      A_NO CNAME                BNAME                    AMOUNT ADATE           
+---------- -------------------- -------------------- ---------- ---------       
+       201 Anil                 Andheri                    7000 01-JAN-06       
+       202 Amit                 Borivali                   5000 15-FEB-06       
+       203 Sunil                Dadar                      3000 10-MAR-06       
+       204 Ravi                 Andheri                    9000 20-JUL-06       
+       205 Ajay                 Bandra                    10000 25-JUL-06       
+
+SQL> SELECT A_no, Amount
+  2  FROM DEPOSIT2
+  3  WHERE adate BETWEEN
+  4  TO_DATE('01-JAN-2006','DD-MON-YYYY')
+  5  AND TO_DATE('25-JUL-2006','DD-MON-YYYY');
+
+      A_NO     AMOUNT                                                           
+---------- ----------                                                           
+       201       7000                                                           
+       202       5000                                                           
+       203       3000                                                           
+       204       9000                                                           
+       205      10000                                                           
+
+SQL> SELECT * FROM JOB1
+  2  WHERE min_sal > 4000;
+
+JOB_ID     JOB_NAME                          MIN_SAL    MAX_SAL                 
+---------- ------------------------------ ---------- ----------                 
+J001       Manager                              5000      10000                 
+
+SQL> SELECT emp_name, emp_sal
+  2  FROM EMPLOYEE2
+  3  WHERE dept_no = 20;
+
+EMP_NAME                EMP_SAL                                                 
+-------------------- ----------                                                 
+Amit                       7000                                                 
+Ajay                       8000                                                 
+
+SQL> SELECT emp_no, emp_name, dept_no
+  2  FROM EMPLOYEE2
+  3  WHERE dept_no BETWEEN 10 AND 20;
+
+    EMP_NO EMP_NAME                DEPT_NO                                      
+---------- -------------------- ----------                                      
+       101 Anil                         10                                      
+       102 Amit                         20                                      
+       103 Sunil                        10                                      
+       105 Ajay                         20                                      
+       106 Neha                         10                                      
+
+SQL> SELECT * FROM EMPLOYEE2
+  2  WHERE emp_name LIKE 'A%';
+
+    EMP_NO EMP_NAME                EMP_SAL   EMP_COMM    DEPT_NO                
+---------- -------------------- ---------- ---------- ----------                
+       101 Anil                       6000        500         10                
+       102 Amit                       7000        600         20                
+       105 Ajay                       8000        700         20                
+
+SQL> SELECT * FROM EMPLOYEE2
+  2  WHERE emp_name LIKE 'A_a%';
+
+    EMP_NO EMP_NAME                EMP_SAL   EMP_COMM    DEPT_NO                
+---------- -------------------- ---------- ---------- ----------                
+       105 Ajay                       8000        700         20                
+
+SQL> SELECT * FROM EMPLOYEE2
+  2  WHERE emp_name LIKE '__a%';
+
+no rows selected
+
+SQL> SELECT EMP_NAME, EMP_NO, EMP_SAL
+  2  FROM EMPLOYEE2
+  3  WHERE EMP_NAME LIKE 'Ani__';
+
+     EMP_NO EMP_NAME             EMP_SAL
+----------- ------------------ ----------------------------------
+       105  Anita                   5000
+
+SQL> SELECT cname
+  2  FROM DEPOSIT2
+  3  ORDER BY cname;
+
+CNAME                                                                           
+--------------------                                                            
+Ajay                                                                            
+Amit                                                                            
+Anil                                                                            
+Ravi                                                                            
+Sunil                                                                           
+
+SQL> SPOOL OFF;
